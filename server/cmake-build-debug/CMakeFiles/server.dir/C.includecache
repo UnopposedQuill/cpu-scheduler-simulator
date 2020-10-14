@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
+
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c
+stdio.h
+-
+configuration.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
+

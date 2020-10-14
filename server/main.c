@@ -1,6 +1,20 @@
 #include <stdio.h>
 
+#include "configuration.h"
+
+struct configuration {
+    short isValid;
+};
+
 int main() {
-    printf("Hello, World!\n");
+    //Declare a new configuration
+    struct configuration conf;
+    configure(&conf);//Overwrite it with a configuration
+
+    if (!conf.isValid){
+        printf("Not valid configuration");
+        return 1;
+    }
+    printf("Valid configuration, preparing sockets\n");
     return 0;
 }

@@ -76,6 +76,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h">
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c">
 			<Option target="server"/>
 		</Unit>
