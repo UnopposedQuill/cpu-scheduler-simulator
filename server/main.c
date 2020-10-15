@@ -12,7 +12,7 @@ int main() {
     configure(&conf);//Overwrite it with a configuration
 
     if (!conf.isValid){
-        printf("Not valid configuration");
+        printf("Configuration invalid");
         return 1;
     }
     printf("Valid configuration, preparing sockets\n");
