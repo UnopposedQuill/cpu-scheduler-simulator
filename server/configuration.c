@@ -35,12 +35,15 @@ void configure(struct configuration * conf){
 
     char port[6], maximumPendingConnections[5], schedulerType[2];
 
+    //This will take care of reading the config values and setting them into each variable
     fscanf(confFile,
            "[SETUP]\n"
            "Port=%s\n"
            "MaxWaitingConnections=%s\n"
            "SchedulerType=%s\n", port, maximumPendingConnections, schedulerType);
     fclose(confFile);
+
+    //Now I need to convert, and insert each variable to its corresponding place in the configuration variable
     conf->port = (int) strtol(port, NULL, 10);
     conf->maximumPendingConnections = (int) strtol(maximumPendingConnections, NULL, 10);
     conf->schedulerType = (int) strtol(schedulerType, NULL, 10);

@@ -7,6 +7,7 @@ struct configuration {
 };
 
 int main() {
+    //<editor-fold defaultstate=collapsed desc="Configuration">
     //Declare a new configuration
     struct configuration conf;
     configure(&conf);//Overwrite it with a configuration
@@ -16,5 +17,11 @@ int main() {
         return 1;
     }
     printf("Valid configuration, preparing sockets\n");
+
+    //</editor-fold>
+
+    //<editor-fold defaultstate=collapsed desc="Initialization">
+
+    //</editor-fold>
     return 0;
 }
