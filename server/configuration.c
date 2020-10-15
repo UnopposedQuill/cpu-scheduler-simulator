@@ -2,6 +2,7 @@
 // Created by esteban on 14/10/20.
 //
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "configuration.h"
 
@@ -32,11 +33,17 @@ void configure(struct configuration * conf){
         return;
     }
 
+    char port[6], maximumPendingConnections[5], schedulerType[2];
+
     fscanf(confFile,
            "[SETUP]\n"
-           "Port=%d\n"
-           "MaxWaitingConnections=%d\n"
-           "SchedulerType=%d\n", &conf->port, &conf->maximumPendingConnections, &conf->schedulerType);
+           "Port=%s\n"
+           "MaxWaitingConnections=%s\n"
+           "SchedulerType=%s\n", port, maximumPendingConnections, schedulerType);
     fclose(confFile);
+    conf->port = (int) strtol(port, NULL, 10);
+    conf->maximumPendingConnections = (int) strtol(maximumPendingConnections, NULL, 10);
+    conf->schedulerType = (int) strtol(schedulerType, NULL, 10);
+
     conf->isValid = 1;
 }
