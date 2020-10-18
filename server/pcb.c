@@ -93,6 +93,8 @@ int clearList(struct pcbList * _pcbList){
             free(clearNode);
             pcbCleared++;
         }
+        _pcbList->len = 0;
+        _pcbList->firstNode = NULL;
     }
     return pcbCleared;
 
