@@ -197,6 +197,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.s
 .PHONY : main.c.s
 
+pcb.o: pcb.c.o
+
+.PHONY : pcb.o
+
+# target to build an object file
+pcb.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/pcb.c.o
+.PHONY : pcb.c.o
+
+pcb.i: pcb.c.i
+
+.PHONY : pcb.i
+
+# target to preprocess a source file
+pcb.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/pcb.c.i
+.PHONY : pcb.c.i
+
+pcb.s: pcb.c.s
+
+.PHONY : pcb.s
+
+# target to generate assembly for a file
+pcb.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/pcb.c.s
+.PHONY : pcb.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +239,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... pcb.o"
+	@echo "... pcb.i"
+	@echo "... pcb.s"
 .PHONY : help
 
 

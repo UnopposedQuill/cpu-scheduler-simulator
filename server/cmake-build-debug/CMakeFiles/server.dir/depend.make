@@ -6,4 +6,8 @@ CMakeFiles/server.dir/configuration.c.o: ../configuration.h
 
 CMakeFiles/server.dir/main.c.o: ../configuration.h
 CMakeFiles/server.dir/main.c.o: ../main.c
+CMakeFiles/server.dir/main.c.o: ../pcb.h
+
+CMakeFiles/server.dir/pcb.c.o: ../pcb.c
+CMakeFiles/server.dir/pcb.c.o: ../pcb.h
 

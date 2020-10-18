@@ -3,4 +3,4 @@ project(server C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(server main.c configuration.c configuration.h)
+add_executable(server main.c configuration.c configuration.h pcb.c pcb.h)
