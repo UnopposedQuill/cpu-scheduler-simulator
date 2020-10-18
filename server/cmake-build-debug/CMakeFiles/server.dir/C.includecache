@@ -6,9 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.c
-stdlib.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
+
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c
+stdio.h
 -
+pthread.h
+-
+unistd.h
+-
+configuration.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
 pcb.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
 

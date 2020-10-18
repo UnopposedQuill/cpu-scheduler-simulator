@@ -20,6 +20,7 @@ struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priori
     target->pid = pid;
     target->burst = burst;
     target->priority = priority;
+    target->progress = 0;
     return target;
 }
 

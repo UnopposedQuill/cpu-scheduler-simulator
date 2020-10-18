@@ -1,7 +1,15 @@
+
 #include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
 
 #include "configuration.h"
 #include "pcb.h"
+
+void *performWork(void * arguments){
+    printf("Test");
+    sleep(10);
+}
 
 int main() {
 
@@ -37,6 +45,14 @@ int main() {
 
     printf("Data structures prepared, preparing threads\n");
 
-
-    return 0;
+    // <editor-fold defaultstate=collapsed desc="Threads">
+    pthread_t threads[1];
+    int result = pthread_create(&threads[0], NULL, performWork, NULL);
+    if (result)
+        return 1;
+    
+    result = pthread_join(threads[0], NULL);
+    if (!result)
+        return 0;
+    return 1;
 }
