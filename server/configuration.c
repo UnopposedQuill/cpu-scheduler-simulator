@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "scheduler.h"
 #include "configuration.h"
 
 void configure(struct configuration * conf){
@@ -23,12 +24,22 @@ void configure(struct configuration * conf){
            "Port=%s\n"
            "MaxWaitingConnections=%s\n"
            "SchedulerType=%s\n", port, maximumPendingConnections, schedulerType);
-    fclose(confFile);
 
     //Now I need to convert, and insert each variable to its corresponding place in the configuration variable
     conf->port = (int) strtol(port, NULL, 10);
     conf->maximumPendingConnections = (int) strtol(maximumPendingConnections, NULL, 10);
     conf->schedulerType = (int) strtol(schedulerType, NULL, 10);
+
+    //If schedulerType is RR, then I need to also receive the quantum size
+    if (conf->schedulerType == ROUNDROBIN){
+        char quantum [10];
+        fscanf(confFile,
+               "Quantum=%s\n", quantum);
+
+        conf->quantum = (int) strtol(quantum, NULL, 10);
+    }
+
+    fclose(confFile);
 
     conf->isValid = 1;
 }

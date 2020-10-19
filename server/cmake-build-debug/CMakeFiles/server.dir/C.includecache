@@ -6,14 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.c
-stdio.h
--
-stdlib.h
--
-configuration.h
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
-
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c
@@ -30,22 +22,6 @@ pcb.h
 scheduler.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.c
-stdlib.h
--
-pcb.h
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
-
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
-
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.c
-stdio.h
--
-unistd.h
--
-scheduler.h
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
-pcb.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h

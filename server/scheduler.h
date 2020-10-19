@@ -10,15 +10,16 @@
 
 struct schedulerInfo{
     unsigned int tick, idleTicks;
+    int working;//This will be used as a flag as to when to stop
     struct pcb * currentProcess;
     struct pcbList * readyList;
-    struct configuration _configuration;
+    struct configuration * _configuration;
 };
 
 enum schedulerType{FIFO, SJF, HPF, ROUNDROBIN, ASJF, AHPF};
 
 
-struct pcbNode * schedule(struct schedulerInfo _schedulerInfo);
+struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo);
 void * jobSchedulerWork(void * arguments);
 void * cpuSchedulerWork(void * arguments);
 

@@ -3,6 +3,8 @@
 
 CMakeFiles/server.dir/configuration.c.o: ../configuration.c
 CMakeFiles/server.dir/configuration.c.o: ../configuration.h
+CMakeFiles/server.dir/configuration.c.o: ../pcb.h
+CMakeFiles/server.dir/configuration.c.o: ../scheduler.h
 
 CMakeFiles/server.dir/main.c.o: ../configuration.h
 CMakeFiles/server.dir/main.c.o: ../main.c

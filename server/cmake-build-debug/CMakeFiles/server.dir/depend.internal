@@ -4,6 +4,8 @@
 CMakeFiles/server.dir/configuration.c.o
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.c
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
+ /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
+ /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
 CMakeFiles/server.dir/main.c.o
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c

@@ -44,7 +44,7 @@ int main() {
     struct schedulerInfo _schedulerInfo;
     _schedulerInfo.readyList = &readyList;
     _schedulerInfo.tick = 0;
-    _schedulerInfo._configuration = _configuration;
+    _schedulerInfo._configuration = &_configuration;
 
     //</editor-fold>
 
@@ -59,6 +59,14 @@ int main() {
     result = pthread_create(&threads[1], NULL, cpuSchedulerWork, &_schedulerInfo);
     if (result)
         return 1;
+
+    int c;
+
+    printf( "Program is working, press a key to finish\n");
+    c = getchar();
+
+    //Flag the threads to stop working
+    _schedulerInfo.working = 0;
 
     result = pthread_join(threads[0], NULL);
     if (!result) {

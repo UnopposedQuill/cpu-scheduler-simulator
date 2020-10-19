@@ -68,7 +68,7 @@ struct pcbNode * insertNewPcb(struct pcbList * _pcbList, struct pcb * _pcb){
     return wrapper;
 }
 
-struct pcbNode * removePcbPid(struct pcbList * _pcbList, int pid){
+struct pcbNode * removePcbPid(struct pcbList * _pcbList, unsigned int pid){
     if (_pcbList == NULL) return NULL;//No list to remove from
 
     struct pcbNode * ptr = _pcbList->firstNode;
