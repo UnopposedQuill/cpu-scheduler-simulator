@@ -6,24 +6,6 @@
 
 #include "configuration.h"
 
-struct configuration{
-
-    /**
-     * The most important step, if > 0, this configuration will be valid
-     */
-    short isValid;
-
-    /**
-     * There are multiple types of schedulers, this will signal which one is being simulated
-     */
-    int schedulerType;
-
-    /**
-     * This is needed for the server, to decide how it will attend to requests
-     */
-    int maximumPendingConnections, port;
-};
-
 void configure(struct configuration * conf){
     conf->isValid = 0;//I'll flag it as not valid until I find it otherwise
 
