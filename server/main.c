@@ -29,14 +29,16 @@ int main() {
     readyList.firstNode = NULL;
     readyList.len = 0;
 
-    //Current process that's being worked on by the CPU
-    struct pcb current;
-
+    /*
     struct pcb *_pcb = createPcb(1, 2, 1, 0);
 
     insertNewPcb(&readyList, _pcb);
 
+    insertNewPcb(&readyList, createPcb(2, 4, 2, 1));
+    insertNewPcb(&readyList, createPcb(3, 5, 4, 2));
+
     clearList(&readyList);
+    */
 
     //I'll create this so both schedulers can access it
     struct schedulerInfo _schedulerInfo;

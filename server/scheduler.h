@@ -10,6 +10,7 @@
 
 struct schedulerInfo{
     unsigned int tick, idleTicks;
+    struct pcb * currentProcess;
     struct pcbList * readyList;
     struct configuration _configuration;
 };

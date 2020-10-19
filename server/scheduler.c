@@ -33,7 +33,22 @@ struct pcbNode * schedule(struct schedulerInfo _schedulerInfo){
         case FIFO:{
             return _schedulerInfo.readyList->firstNode;
         }
-
+        case SJF:{
+            printf("SJF Not implemented yet\n");
+        }
+        case HPF:{
+            printf("HJF Not implemented yet\n");
+        }
+        case ROUNDROBIN:{
+            printf("RoundRobin Not implemented yet\n");
+        }
+        case ASJF:{
+            printf("Appropiative SJF Not implemented yet\n");
+        }
+        case AHPF:{
+            printf("Appropiative HPF Not implemented yet\n");
+            return NULL;
+        }
     }
     return NULL;
 }

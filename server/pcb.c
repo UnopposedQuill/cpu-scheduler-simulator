@@ -45,16 +45,24 @@ struct pcbNode * insertNewPcb(struct pcbList * _pcbList, struct pcb * _pcb){
         wrapper = malloc(sizeof(struct pcbNode));
     } while (wrapper == NULL);
 
+    //Assign the data inside the wrapper
     wrapper->node = _pcb;
-    wrapper->next = _pcbList->firstNode;
+    wrapper->next = NULL;
     _pcbList->len++;
 
+    //If there are no elements, just place it there
     if (_pcbList->firstNode == NULL){
         _pcbList->firstNode = wrapper;
         wrapper->previous = NULL;
     }
     else{
-        _pcbList->firstNode->previous = wrapper;
+        //I need to go through all the list, until the last element
+        struct pcbNode * ptr = _pcbList->firstNode;
+        while (ptr->next != NULL) ptr = ptr->next;
+
+        //Then hook the current wrapper to the last element
+        ptr->next = wrapper;
+        wrapper->previous = ptr;
     }
 
     return wrapper;
