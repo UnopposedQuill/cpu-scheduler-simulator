@@ -91,6 +91,12 @@
 		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h">
 			<Option target="server"/>
 		</Unit>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h">
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

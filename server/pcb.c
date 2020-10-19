@@ -12,7 +12,7 @@
  * @param priority The priority for the process
  * @return A pcb structure representing the information for the process
  */
-struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priority){
+struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priority, unsigned int tick){
     struct pcb * target;
     do {
         target = malloc(sizeof(struct pcb));
@@ -21,6 +21,7 @@ struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priori
     target->burst = burst;
     target->priority = priority;
     target->progress = 0;
+    target->tickOfEntry = tick;
     return target;
 }
 
@@ -73,6 +74,9 @@ struct pcbNode * removePcbPid(struct pcbList * _pcbList, int pid){
                 ptr->next->previous = ptr->previous;
             }
             _pcbList->len--;
+            if (_pcbList->firstNode == ptr){
+                _pcbList->firstNode = NULL;
+            }
             return ptr;
         }
 
@@ -88,6 +92,7 @@ int clearList(struct pcbList * _pcbList){
     if (_pcbList != NULL){
         struct pcbNode * clearNode, * ptr = _pcbList->firstNode;
         while (ptr != NULL){
+            destroyPcb(ptr->node);
             clearNode = ptr;
             ptr = ptr->next;
             free(clearNode);

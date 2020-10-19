@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/cmake-build-debug/CMakeFiles/server.dir/configuration.c.o"
   "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/cmake-build-debug/CMakeFiles/server.dir/main.c.o"
   "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/cmake-build-debug/CMakeFiles/server.dir/pcb.c.o"
+  "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/cmake-build-debug/CMakeFiles/server.dir/scheduler.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

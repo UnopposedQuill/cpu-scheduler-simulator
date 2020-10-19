@@ -224,6 +224,33 @@ pcb.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/pcb.c.s
 .PHONY : pcb.c.s
 
+scheduler.o: scheduler.c.o
+
+.PHONY : scheduler.o
+
+# target to build an object file
+scheduler.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/scheduler.c.o
+.PHONY : scheduler.c.o
+
+scheduler.i: scheduler.c.i
+
+.PHONY : scheduler.i
+
+# target to preprocess a source file
+scheduler.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/scheduler.c.i
+.PHONY : scheduler.c.i
+
+scheduler.s: scheduler.c.s
+
+.PHONY : scheduler.s
+
+# target to generate assembly for a file
+scheduler.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/scheduler.c.s
+.PHONY : scheduler.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -242,6 +269,9 @@ help:
 	@echo "... pcb.o"
 	@echo "... pcb.i"
 	@echo "... pcb.s"
+	@echo "... scheduler.o"
+	@echo "... scheduler.i"
+	@echo "... scheduler.s"
 .PHONY : help
 
 

@@ -5,29 +5,16 @@
 
 #include "configuration.h"
 #include "pcb.h"
-
-void * jobSchedulerWork(void * arguments){
-    printf("Inserting test jobs");
-    struct pcbList * readyList = (struct pcbList *) arguments;
-    insertNewPcb(readyList, createPcb(10, 2, 1));
-    return NULL;
-}
-
-void * cpuSchedulerWork(void * arguments){
-    printf("Removing test jobs");
-    struct pcbList * readyList = (struct pcbList *) arguments;
-    removePcbPid(readyList, 10);
-    return NULL;
-}
+#include "scheduler.h"
 
 int main() {
 
     //<editor-fold defaultstate=collapsed desc="Configuration">
     //Declare a new configuration
-    struct configuration conf;
-    configure(&conf);//Overwrite it with a configuration
+    struct configuration _configuration;
+    configure(&_configuration);//Overwrite it with a configuration
 
-    if (!conf.isValid) {
+    if (!_configuration.isValid) {
         printf("Configuration invalid");
         return 1;
     }
@@ -45,22 +32,29 @@ int main() {
     //Current process that's being worked on by the CPU
     struct pcb current;
 
-    struct pcb *_pcb = createPcb(1, 2, 1);
+    struct pcb *_pcb = createPcb(1, 2, 1, 0);
 
     insertNewPcb(&readyList, _pcb);
 
     clearList(&readyList);
+
+    //I'll create this so both schedulers can access it
+    struct schedulerInfo _schedulerInfo;
+    _schedulerInfo.readyList = &readyList;
+    _schedulerInfo.tick = 0;
+    _schedulerInfo._configuration = _configuration;
+
     //</editor-fold>
 
     printf("Data structures prepared, preparing threads\n");
 
     // <editor-fold defaultstate=collapsed desc="Threads Setup">
     pthread_t threads[2];
-    int result = pthread_create(&threads[0], NULL, jobSchedulerWork, &readyList);
+    int result = pthread_create(&threads[0], NULL, jobSchedulerWork, &_schedulerInfo);
     if (result)
         return 1;
 
-    result = pthread_create(&threads[1], NULL, cpuSchedulerWork, &readyList);
+    result = pthread_create(&threads[1], NULL, cpuSchedulerWork, &_schedulerInfo);
     if (result)
         return 1;
 
