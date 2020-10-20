@@ -16,7 +16,7 @@ struct pcbNode{
 
 struct pcbList{
     struct pcbNode * firstNode;
-    int len;
+    unsigned int len;
 };
 
 struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priority, unsigned int tick);
