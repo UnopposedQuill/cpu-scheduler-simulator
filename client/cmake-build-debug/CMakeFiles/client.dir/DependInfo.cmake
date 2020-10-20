@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/client.dir/configuration.c.o"
   "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/client.dir/main.c.o"
+  "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.c" "/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/client.dir/requester.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

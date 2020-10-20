@@ -79,18 +79,20 @@ void * jobSchedulerWork(void * arguments){
         return NULL;
     }
 
-    if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
-        //No pudo aceptarla
-        perror("\nError upon accepting a new connection");
-        close(new_socket);
-        _schedulerInfo->working = 0;
-        return NULL;
-    }
-
     // </editor-fold>
 
     // <editor-fold defaultstate=collapsed desc="Socket serving cycle">
     while (_schedulerInfo->working){
+
+        //Each socket connection will bring at most one process here
+        if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
+            //No pudo aceptarla
+            perror("\nError upon accepting a new connection");
+            close(new_socket);
+            _schedulerInfo->working = 0;
+            return NULL;
+        }
+
         //I'll try to read the line which is in format "burst,priority\n" from the socket
         if ((valread = recv(new_socket, buffer, 256, 0)) <= 0){
             perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
@@ -100,13 +102,15 @@ void * jobSchedulerWork(void * arguments){
         //Now I need to convert them
         char * burst, * priority;
         //Use strtok to separate both values
-        burst = strtok(buffer, ",");
-        priority = strtok(NULL, ",");
+        burst = strtok(buffer, "\t");
+        priority = strtok(NULL, "\t");
 
         //Now I can use strtol to convert them into long, which I cast into unsigned integers
         struct pcbNode * inserted = insertNewPcb(_schedulerInfo->readyList,
                                             createPcb(_schedulerInfo->lastPid++, (unsigned int)strtol(burst, NULL, 10),
                                                     (unsigned int)strtol(priority, NULL, 10), _schedulerInfo->tick));
+
+        free(burst);free(priority);//I don't need either anymore
 
         printf("Added new process to ready queue pid: %d, burst: %d, priority: %d, tick of entry: %d\n", inserted->node->pid, inserted->node->burst, inserted->node->priority, inserted->node->tickOfEntry);
         //Now I have to reply the Pid assigned
@@ -119,6 +123,7 @@ void * jobSchedulerWork(void * arguments){
             close(new_socket);
             return NULL;
         }
+        close(new_socket);//I'm done serving this request, time to go with the next one
     }
 
     // </editor-fold>

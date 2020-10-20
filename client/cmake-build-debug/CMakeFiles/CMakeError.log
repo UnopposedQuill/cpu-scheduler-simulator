@@ -1,0 +1,42 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6d7cf/fast && /usr/bin/make  -f CMakeFiles/cmTC_6d7cf.dir/build.make CMakeFiles/cmTC_6d7cf.dir/build
+make[1]: se entra en el directorio '/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6d7cf.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -std=gnu11 -o CMakeFiles/cmTC_6d7cf.dir/src.c.o   -c /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_6d7cf
+/home/esteban/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/202.7660.37/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6d7cf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    CMakeFiles/cmTC_6d7cf.dir/src.c.o  -o cmTC_6d7cf 
+/usr/bin/ld: CMakeFiles/cmTC_6d7cf.dir/src.c.o: en la función `main':
+src.c:(.text+0x3e): referencia a `pthread_create' sin definir
+/usr/bin/ld: src.c:(.text+0x4a): referencia a `pthread_detach' sin definir
+/usr/bin/ld: src.c:(.text+0x56): referencia a `pthread_cancel' sin definir
+/usr/bin/ld: src.c:(.text+0x67): referencia a `pthread_join' sin definir
+collect2: error: ld devolvió el estado de salida 1
+make[1]: *** [CMakeFiles/cmTC_6d7cf.dir/build.make:107: cmTC_6d7cf] Error 1
+make[1]: se sale del directorio '/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/cmake-build-debug/CMakeFiles/CMakeTmp'
+make: *** [Makefile:141: cmTC_6d7cf/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+

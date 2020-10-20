@@ -85,6 +85,12 @@
 		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c">
 			<Option target="client"/>
 		</Unit>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.c">
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.h">
+			<Option target="client"/>
+		</Unit>
 		<Unit filename="/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

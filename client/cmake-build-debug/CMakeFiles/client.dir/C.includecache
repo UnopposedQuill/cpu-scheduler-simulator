@@ -8,21 +8,21 @@
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.c
 stdio.h
 -
-netinet/in.h
+stdlib.h
 -
 string.h
 -
-sys/socket.h
+netinet/in.h
 -
 arpa/inet.h
 -
-unistd.h
--
-malloc.h
--
+requester.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.h
+
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.h
 configuration.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
 

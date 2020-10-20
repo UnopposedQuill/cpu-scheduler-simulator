@@ -197,6 +197,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/main.c.s
 .PHONY : main.c.s
 
+requester.o: requester.c.o
+
+.PHONY : requester.o
+
+# target to build an object file
+requester.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/requester.c.o
+.PHONY : requester.c.o
+
+requester.i: requester.c.i
+
+.PHONY : requester.i
+
+# target to preprocess a source file
+requester.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/requester.c.i
+.PHONY : requester.c.i
+
+requester.s: requester.c.s
+
+.PHONY : requester.s
+
+# target to generate assembly for a file
+requester.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/requester.c.s
+.PHONY : requester.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +239,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... requester.o"
+	@echo "... requester.i"
+	@echo "... requester.s"
 .PHONY : help
 
 
