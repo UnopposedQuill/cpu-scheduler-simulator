@@ -32,21 +32,11 @@ int main() {
     doneList.firstNode = NULL;
     doneList.len = 0;
 
-    /*
-    struct pcb *_pcb = createPcb(1, 2, 1, 0);
-
-    insertNewPcb(&readyList, _pcb);
-
-    insertNewPcb(&readyList, createPcb(2, 4, 2, 1));
-    insertNewPcb(&readyList, createPcb(3, 5, 4, 2));
-
-    clearList(&readyList);
-    */
-
     //I'll create this so both schedulers can access it
     struct schedulerInfo _schedulerInfo;
     _schedulerInfo.readyList = &readyList;
     _schedulerInfo.doneList = &doneList;
+    _schedulerInfo.lastPid = 0;
     _schedulerInfo.tick = 0;
     _schedulerInfo.idleTicks = 0;
     _schedulerInfo._configuration = &_configuration;
@@ -73,6 +63,11 @@ int main() {
     if (result)
         return 1;
 
+    //</editor-fold>
+
+    printf("Threads prepared\n");
+
+    // <editor-fold defaultstate=collapsed desc="Closing actions">
     int c;
 
     printf( "Program is working, press a key to finish\n");
@@ -93,4 +88,6 @@ int main() {
         return 0;//All is good
     }
     return 1;
+
+    // </editor-fold>
 }
