@@ -13,9 +13,17 @@
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.c
 stdio.h
 -
+stdlib.h
+-
+string.h
+-
 unistd.h
 -
 malloc.h
+-
+sys/socket.h
+-
+netinet/in.h
 -
 scheduler.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h

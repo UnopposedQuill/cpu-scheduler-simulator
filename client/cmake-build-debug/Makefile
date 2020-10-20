@@ -143,6 +143,33 @@ client/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
 .PHONY : client/fast
 
+configuration.o: configuration.c.o
+
+.PHONY : configuration.o
+
+# target to build an object file
+configuration.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/configuration.c.o
+.PHONY : configuration.c.o
+
+configuration.i: configuration.c.i
+
+.PHONY : configuration.i
+
+# target to preprocess a source file
+configuration.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/configuration.c.i
+.PHONY : configuration.c.i
+
+configuration.s: configuration.c.s
+
+.PHONY : configuration.s
+
+# target to generate assembly for a file
+configuration.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/configuration.c.s
+.PHONY : configuration.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -179,6 +206,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
+	@echo "... configuration.o"
+	@echo "... configuration.i"
+	@echo "... configuration.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -9,7 +9,7 @@
 #define SERVER_SCHEDULER_H
 
 struct schedulerInfo{
-    unsigned int tick, idleTicks;
+    unsigned int tick, idleTicks, lastPid;
     int working;//This will be used as a flag as to when to stop
     struct pcbNode * currentProcess;
     struct pcbList * readyList, * doneList;
