@@ -6,22 +6,22 @@
 
 #IncludeRegexTransform: 
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.c
-stdio.h
--
-stdlib.h
--
-string.h
--
-configuration.h
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
-
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c
 stdio.h
 -
 netinet/in.h
+-
+string.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+malloc.h
 -
 configuration.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h

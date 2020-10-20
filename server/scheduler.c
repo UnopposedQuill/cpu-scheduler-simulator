@@ -79,46 +79,45 @@ void * jobSchedulerWork(void * arguments){
         return NULL;
     }
 
+    if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
+        //No pudo aceptarla
+        perror("\nError upon accepting a new connection");
+        close(new_socket);
+        _schedulerInfo->working = 0;
+        return NULL;
+    }
+
     // </editor-fold>
 
     // <editor-fold defaultstate=collapsed desc="Socket serving cycle">
     while (_schedulerInfo->working){
-        if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
-            //No pudo aceptarla
-            perror("\nError upon accepting a new connection");
+        //I'll try to read the line which is in format "burst,priority\n" from the socket
+        if ((valread = recv(new_socket, buffer, 256, 0)) < 0){
+            perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
             close(new_socket);
-            _schedulerInfo->working = 0;
             return NULL;
         }
-        else{
-            //I'll try to read the line which is in format "burst,priority\n" from the socket
-            if ((valread = recv(new_socket, buffer, 256, 0)) < 0){
-                perror("Error upon reading new request");
-                close(new_socket);
-                _schedulerInfo->working = 0;
-                return NULL;
-            }
-            //Now I need to convert them
-            char burst[128], priority[128];
-            //Use sscanf to separate both numbers
-            sscanf(buffer, "%s,%s", burst, priority);
+        //Now I need to convert them
+        char * burst, * priority;
+        //Use strtok to separate both values
+        burst = strtok(buffer, ",");
+        priority = strtok(NULL, ",");
 
-            //Now I can use strtol to convert them into long, which I cast into unsigned integers
-            struct pcbNode * inserted = insertNewPcb(_schedulerInfo->readyList,
-                                                createPcb(_schedulerInfo->lastPid++, (unsigned int)strtol(burst, NULL, 10),
-                                                        (unsigned int)strtol(priority, NULL, 10), _schedulerInfo->tick));
+        //Now I can use strtol to convert them into long, which I cast into unsigned integers
+        struct pcbNode * inserted = insertNewPcb(_schedulerInfo->readyList,
+                                            createPcb(_schedulerInfo->lastPid++, (unsigned int)strtol(burst, NULL, 10),
+                                                    (unsigned int)strtol(priority, NULL, 10), _schedulerInfo->tick));
 
-            //Now I have to reply the Pid assigned
-            memset(buffer, 0, 256);
-            sprintf(buffer, "%d", inserted->node->pid);
+        printf("Added new process to ready queue pid: %d, burst: %d, priority: %d, tick of entry: %d\n", inserted->node->pid, inserted->node->burst, inserted->node->priority, inserted->node->tickOfEntry);
+        //Now I have to reply the Pid assigned
+        memset(buffer, 0, 256);
+        sprintf(buffer, "%d", inserted->node->pid);
 
-            //Check for errors after sending
-            if ((valread = send(new_socket, buffer, 256, 0)) < 0){
-                perror("Error upon reading new request");
-                close(new_socket);
-                _schedulerInfo->working = 0;
-                return NULL;
-            }
+        //Check for errors after sending
+        if ((valread = send(new_socket, buffer, 256, 0)) < 0){
+            perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
+            close(new_socket);
+            return NULL;
         }
     }
 

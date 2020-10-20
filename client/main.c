@@ -8,6 +8,19 @@
 
 #include "configuration.h"
 
+/**
+ * This function will take care of replacing the first ocurrence of a character, it is used to remove
+ * the newline character from getLine
+ * @param string A string which to replace the character in
+ * @param find The character that will be replaced
+ * @param replace The new character that will replace the other one
+ */
+void replaceFirstCharacter(char * string, char find, char replace){
+    while (*(string++)){
+        if (*string == find) *string = replace;
+    }
+}
+
 int main() {
 
     //<editor-fold defaultstate=collapsed desc="Configuration">
@@ -63,14 +76,16 @@ int main() {
     if (_configuration.clientMode){//1 for automatic mode
         printf("Automatic Mode not implemented yet\n");
     } else{
-        FILE * inputFile = fopen("process.txt", "r");
+        FILE * inputFile = fopen("processes.txt", "r");
         char * line = NULL;
         size_t len = 256;
 
         //While there is file to read, keep reading
         while ((valread = getline(&line, &len, inputFile)) != -1){
             //Got the line, I'll copy it into the buffer
-            strncpy(buffer, line, valread - 1);//it's -1 because it includes the line separator
+            strncpy(buffer, line, valread);//remember it includes the line separator
+
+            replaceFirstCharacter(buffer, '\n', 0);
 
             //Try to send it to the server
             if ((valread = send(socket_handler, buffer, valread, 0)) < 0){
@@ -89,7 +104,7 @@ int main() {
                 close(socket_handler);
                 return 1;
             }
-            printf(", pid assigned by server: %s\n", buffer);
+            printf(".\t Pid assigned by server: %s\n", buffer);
             memset(buffer, 0, 256);
         }
         //I need to free this, as it was allocated by the getLine call
