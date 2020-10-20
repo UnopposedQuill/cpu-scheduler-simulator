@@ -47,16 +47,21 @@ void * cpuSchedulerWork(void * arguments){
                 _schedulerInfo->currentProcess->progress = _schedulerInfo->currentProcess->burst;
                 printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
-                free(scheduledPcb);
-                free(_schedulerInfo->currentProcess);
+                free(scheduledPcb);//Discard the wrapper
+                insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess);//I completed it, add it to done
             }
             else {
-                sleep(_schedulerInfo->_configuration->schedulerType == ROUNDROBIN ? _schedulerInfo->_configuration->quantum : 1);
-                scheduledPcb->node->progress += _schedulerInfo->_configuration->schedulerType == ROUNDROBIN ? _schedulerInfo->_configuration->quantum : 1;
+                unsigned int amountOfWork = 1;
+                if (_schedulerInfo->_configuration->schedulerType == ROUNDROBIN){
+                    amountOfWork = _schedulerInfo->_configuration->quantum < scheduledPcb->node->burst - scheduledPcb->node->progress ?
+                            _schedulerInfo->_configuration->quantum : scheduledPcb->node->burst - scheduledPcb->node->progress;
+                }
+                sleep(amountOfWork);
+                scheduledPcb->node->progress += amountOfWork;
                 if (scheduledPcb->node->progress == scheduledPcb->node->burst){
                     printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
-                    free(scheduledPcb);
-                    free(_schedulerInfo->currentProcess);
+                    free(scheduledPcb);//Discard the wrapper
+                    insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess);//I completed it, add it to done
                 }
             }
         }
