@@ -45,13 +45,13 @@ void * cpuSchedulerWork(void * arguments){
             if (    _schedulerInfo->_configuration->schedulerType != ASJF &&
                     _schedulerInfo->_configuration->schedulerType != AHPF &&
                     _schedulerInfo->_configuration->schedulerType != ROUNDROBIN){
-                sleep(_schedulerInfo->currentProcess->burst);
-                _schedulerInfo->currentProcess->progress = _schedulerInfo->currentProcess->burst;
-                _schedulerInfo->currentProcess->tickOfCompletion = _schedulerInfo->tick;
-                printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
+                sleep(_schedulerInfo->currentProcess->node->burst);
+                _schedulerInfo->currentProcess->node->progress = _schedulerInfo->currentProcess->node->burst;
+                _schedulerInfo->currentProcess->node->tickOfCompletion = _schedulerInfo->tick;
+                printf("Completed job: %d\n", _schedulerInfo->currentProcess->node->pid);
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                 free(scheduledPcb);//Discard the wrapper
-                insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess);//I completed it, add it to done
+                insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
             }
             else {
                 unsigned int amountOfWork = 1;
@@ -62,10 +62,10 @@ void * cpuSchedulerWork(void * arguments){
                 sleep(amountOfWork);
                 scheduledPcb->node->progress += amountOfWork;
                 if (scheduledPcb->node->progress == scheduledPcb->node->burst){
-                    _schedulerInfo->currentProcess->tickOfCompletion = _schedulerInfo->tick;
-                    printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
+                    _schedulerInfo->currentProcess->node->tickOfCompletion = _schedulerInfo->tick;
+                    printf("Completed job: %d\n", _schedulerInfo->currentProcess->node->pid);
                     free(scheduledPcb);//Discard the wrapper
-                    insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess);//I completed it, add it to done
+                    insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
                 }
             }
         }
@@ -109,8 +109,11 @@ struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo){
             return bestPcb;
         }
         case ROUNDROBIN:{
-            printf("RoundRobin Not implemented yet\n");
-            return NULL;
+            if (_schedulerInfo->currentProcess != NULL && _schedulerInfo->currentProcess->next != NULL){
+                return _schedulerInfo->currentProcess->next;
+            } else{
+                return _schedulerInfo->readyList->firstNode;
+            }
         }
     }
     return NULL;
