@@ -83,8 +83,9 @@ struct pcbNode * removePcbPid(struct pcbList * _pcbList, unsigned int pid){
             }
             _pcbList->len--;
             if (_pcbList->firstNode == ptr){
-                _pcbList->firstNode = NULL;
+                _pcbList->firstNode = ptr->next;
             }
+            ptr->next = ptr->previous = NULL;
             return ptr;
         }
 

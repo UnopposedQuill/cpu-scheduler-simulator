@@ -22,6 +22,8 @@ void * jobSchedulerWork(void * arguments){
     printf("Job scheduler initialized\n");
     struct schedulerInfo * _schedulerInfo = (struct schedulerInfo *) arguments;
     insertNewPcb(_schedulerInfo->readyList, createPcb(10, 2, 1, _schedulerInfo->tick));
+    sleep(1);
+    insertNewPcb(_schedulerInfo->readyList, createPcb(12, 2, 1, _schedulerInfo->tick));
     return NULL;
 }
 
@@ -126,7 +128,7 @@ void showStatistics(struct schedulerInfo * _schedulerInfo){
             break;
         }
     }
-    printf(" Scheduler\nIdle Time: %d\nProcesses completed: %d", _schedulerInfo->idleTicks, _schedulerInfo->doneList->len);
+    printf(" Scheduler\nIdle Time: %d\nProcesses completed: %d\nProcesses still ready: %d", _schedulerInfo->idleTicks, _schedulerInfo->doneList->len, _schedulerInfo->readyList->len);
 
     //TODO: Add remaining statistics
 }
