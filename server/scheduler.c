@@ -41,7 +41,7 @@ void * cpuSchedulerWork(void * arguments){
         }
         else{ //There's work I can do
             printf("Job selected: %d\n", scheduledPcb->node->pid);
-            _schedulerInfo->currentProcess = scheduledPcb->node;//I design the found pcb as the one it's being worked
+            _schedulerInfo->currentProcess = scheduledPcb;//I design the found pcb as the one it's being worked
             if (    _schedulerInfo->_configuration->schedulerType != ASJF &&
                     _schedulerInfo->_configuration->schedulerType != AHPF &&
                     _schedulerInfo->_configuration->schedulerType != ROUNDROBIN){
