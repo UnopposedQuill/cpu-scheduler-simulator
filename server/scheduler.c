@@ -92,7 +92,7 @@ void * jobSchedulerWork(void * arguments){
     // <editor-fold defaultstate=collapsed desc="Socket serving cycle">
     while (_schedulerInfo->working){
         //I'll try to read the line which is in format "burst,priority\n" from the socket
-        if ((valread = recv(new_socket, buffer, 256, 0)) < 0){
+        if ((valread = recv(new_socket, buffer, 256, 0)) <= 0){
             perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
             close(new_socket);
             return NULL;
@@ -114,7 +114,7 @@ void * jobSchedulerWork(void * arguments){
         sprintf(buffer, "%d", inserted->node->pid);
 
         //Check for errors after sending
-        if ((valread = send(new_socket, buffer, 256, 0)) < 0){
+        if ((valread = send(new_socket, buffer, 256, 0)) <= 0){
             perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
             close(new_socket);
             return NULL;
