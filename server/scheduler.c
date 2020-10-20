@@ -47,6 +47,7 @@ void * cpuSchedulerWork(void * arguments){
                     _schedulerInfo->_configuration->schedulerType != ROUNDROBIN){
                 sleep(_schedulerInfo->currentProcess->burst);
                 _schedulerInfo->currentProcess->progress = _schedulerInfo->currentProcess->burst;
+                _schedulerInfo->currentProcess->tickOfCompletion = _schedulerInfo->tick;
                 printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                 free(scheduledPcb);//Discard the wrapper
@@ -61,6 +62,7 @@ void * cpuSchedulerWork(void * arguments){
                 sleep(amountOfWork);
                 scheduledPcb->node->progress += amountOfWork;
                 if (scheduledPcb->node->progress == scheduledPcb->node->burst){
+                    _schedulerInfo->currentProcess->tickOfCompletion = _schedulerInfo->tick;
                     printf("Completed job: %d\n", _schedulerInfo->currentProcess->pid);
                     free(scheduledPcb);//Discard the wrapper
                     insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess);//I completed it, add it to done
@@ -128,7 +130,20 @@ void showStatistics(struct schedulerInfo * _schedulerInfo){
             break;
         }
     }
-    printf(" Scheduler\nIdle Time: %d\nProcesses completed: %d\nProcesses still ready: %d", _schedulerInfo->idleTicks, _schedulerInfo->doneList->len, _schedulerInfo->readyList->len);
+    printf(" Scheduler\nIdle Time: %d\nProcesses completed: %d\nProcesses still ready: %d\n\nDetailed per-process statistics:\n", _schedulerInfo->idleTicks, _schedulerInfo->doneList->len, _schedulerInfo->readyList->len);
 
-    //TODO: Add remaining statistics
+    struct pcbNode * ptr = _schedulerInfo->doneList->firstNode;
+    double averageTurnAroundTime = 0, averageWaitingTime = 0;
+
+    while (ptr != NULL && ptr->node != NULL){//No wrapper should have it's node NULL, but I prefer to prevent errors
+        unsigned int turnaroundTime = ptr->node->tickOfCompletion - ptr->node->tickOfEntry;
+        printf("Process pid: %d, burst: %d, tick of entry: %d, tick of completion: %d, turn-around time: %d, waiting time: %d\n",
+               ptr->node->pid, ptr->node->burst, ptr->node->tickOfEntry, ptr->node->tickOfCompletion, turnaroundTime, turnaroundTime - ptr->node->burst);
+
+        averageTurnAroundTime += turnaroundTime;
+        averageWaitingTime += (turnaroundTime - ptr->node->burst);
+        ptr = ptr->next;
+    }
+
+    printf("\nAverage Turn-around time: %f, average waiting time: %f", averageTurnAroundTime / _schedulerInfo->doneList->len, averageWaitingTime / _schedulerInfo->doneList->len);
 }

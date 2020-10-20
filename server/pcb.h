@@ -6,7 +6,7 @@
 #define SERVER_PCB_H
 
 struct pcb{
-    unsigned int pid, burst, priority, progress, tickOfEntry;
+    unsigned int pid, burst, priority, progress, tickOfEntry, tickOfCompletion;
 };
 
 struct pcbNode{
