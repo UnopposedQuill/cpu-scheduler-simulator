@@ -82,20 +82,34 @@ struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo){
         case FIFO:{//I place the last received one in last place, so I just pick the first one
             return _schedulerInfo->readyList->firstNode;
         }
+        case ASJF://I'll recycle this, since what matters is that it may be interrupting while working, not when choosing
         case SJF:{
-            printf("SJF Not implemented yet\n");
+            //First will be used to go through the list, second will be used to store the best one
+            struct pcbNode * ptr = _schedulerInfo->readyList->firstNode, * bestPcb = NULL;
+            while (ptr->node != NULL){
+                //I found a better pcb to target next
+                if (bestPcb == NULL || ptr->node->burst - ptr->node->progress < bestPcb->node->burst - bestPcb->node->progress){
+                    bestPcb = ptr;
+                }
+                ptr = ptr->next;
+            }
+            return bestPcb;
         }
+        case AHPF:
         case HPF:{
-            printf("HJF Not implemented yet\n");
+            //First will be used to go through the list, second will be used to store the best one
+            struct pcbNode * ptr = _schedulerInfo->readyList->firstNode, * bestPcb = NULL;
+            while (ptr->node != NULL){
+                //I found a better pcb to target next
+                if (bestPcb == NULL || ptr->node->priority < bestPcb->node->priority){
+                    bestPcb = ptr;
+                }
+                ptr = ptr->next;
+            }
+            return bestPcb;
         }
         case ROUNDROBIN:{
             printf("RoundRobin Not implemented yet\n");
-        }
-        case ASJF:{
-            printf("Appropiative SJF Not implemented yet\n");
-        }
-        case AHPF:{
-            printf("Appropiative HPF Not implemented yet\n");
             return NULL;
         }
     }

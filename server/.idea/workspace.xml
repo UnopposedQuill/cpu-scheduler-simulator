@@ -31,8 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7661d48d-378b-4e1e-a98f-95c8f2fbbffb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcb.h" beforeDir="false" afterPath="$PROJECT_DIR$/pcb.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scheduler.c" beforeDir="false" afterPath="$PROJECT_DIR$/scheduler.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +84,7 @@
       <workItem from="1603052422879" duration="1212000" />
       <workItem from="1603063223959" duration="6835000" />
       <workItem from="1603086171900" duration="4565000" />
-      <workItem from="1603144857734" duration="5373000" />
+      <workItem from="1603144857734" duration="7790000" />
     </task>
     <servers />
   </component>
@@ -118,22 +116,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="738" y="300" width="424" height="521" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1602287846142" />
-    <state width="1874" height="216" key="GridCell.Tab.0.bottom" timestamp="1603155171964">
+    <state width="1874" height="215" key="GridCell.Tab.0.bottom" timestamp="1603155309782">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="216" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603155171964" />
-    <state width="1874" height="216" key="GridCell.Tab.0.center" timestamp="1603155171964">
+    <state width="1874" height="215" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603155309782" />
+    <state width="1874" height="215" key="GridCell.Tab.0.center" timestamp="1603155309782">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="216" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603155171964" />
-    <state width="1874" height="216" key="GridCell.Tab.0.left" timestamp="1603155171963">
+    <state width="1874" height="215" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603155309782" />
+    <state width="1874" height="215" key="GridCell.Tab.0.left" timestamp="1603155309781">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="216" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603155171963" />
-    <state width="1874" height="216" key="GridCell.Tab.0.right" timestamp="1603155171964">
+    <state width="1874" height="215" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603155309781" />
+    <state width="1874" height="215" key="GridCell.Tab.0.right" timestamp="1603155309782">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="216" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603155171964" />
+    <state width="1874" height="215" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603155309782" />
     <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1603154325754">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -158,16 +156,5 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603003206300" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/scheduler.c</url>
-          <line>35</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
