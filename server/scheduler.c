@@ -139,7 +139,7 @@ void * cpuSchedulerWork(void * arguments){
             sleep(1);
         }
         else{ //There's work I can do
-            printf("Job selected: %d\n", scheduledPcb->node->pid);
+            printf("Selected job pid: %d, burst: %d, priority: %d\n", scheduledPcb->node->pid, scheduledPcb->node->burst, scheduledPcb->node->priority);
             _schedulerInfo->currentProcess = scheduledPcb;//I design the found pcb as the one it's being worked
             if (    _schedulerInfo->_configuration->schedulerType != ASJF &&
                     _schedulerInfo->_configuration->schedulerType != AHPF &&
@@ -148,7 +148,7 @@ void * cpuSchedulerWork(void * arguments){
                 _schedulerInfo->currentProcess->node->progress = _schedulerInfo->currentProcess->node->burst;
                 _schedulerInfo->currentProcess->node->tickOfCompletion = _schedulerInfo->tick;
 
-                printf("Completed job: %d\n", _schedulerInfo->currentProcess->node->pid);
+                printf("Completed job pid: %d, burst: %d, priority: %d\n", _schedulerInfo->currentProcess->node->pid, _schedulerInfo->currentProcess->node->burst, _schedulerInfo->currentProcess->node->priority);
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                 insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
                 free(scheduledPcb);//Discard the wrapper
@@ -163,9 +163,10 @@ void * cpuSchedulerWork(void * arguments){
                 scheduledPcb->node->progress += amountOfWork;
                 if (scheduledPcb->node->progress == scheduledPcb->node->burst){
                     _schedulerInfo->currentProcess->node->tickOfCompletion = _schedulerInfo->tick;
-                    printf("Completed job: %d\n", _schedulerInfo->currentProcess->node->pid);
-                    free(scheduledPcb);//Discard the wrapper
+                    printf("Completed job pid: %d, burst: %d, priority: %d\n", _schedulerInfo->currentProcess->node->pid, _schedulerInfo->currentProcess->node->burst, _schedulerInfo->currentProcess->node->priority);
+                    removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                     insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
+                    free(scheduledPcb);//Discard the wrapper
                 }
             }
         }
