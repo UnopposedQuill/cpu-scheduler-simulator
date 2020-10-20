@@ -9,15 +9,24 @@
 #include "scheduler.h"
 #include "pcb.h"
 
+void * clockTickerWork(void * arguments){
+    struct schedulerInfo * _schedulerInfo = (struct schedulerInfo *) arguments;
+    while (_schedulerInfo->working){
+        sleep(1);
+        _schedulerInfo->tick++;
+    }
+    return NULL;
+}
+
 void * jobSchedulerWork(void * arguments){
-    printf("Inserting test jobs\n");
+    printf("Job scheduler initialized\n");
     struct schedulerInfo * _schedulerInfo = (struct schedulerInfo *) arguments;
     insertNewPcb(_schedulerInfo->readyList, createPcb(10, 2, 1, _schedulerInfo->tick));
     return NULL;
 }
 
 void * cpuSchedulerWork(void * arguments){
-    printf("Removing test jobs\n");
+    printf("Cpu Scheduler initialized\n");
     struct schedulerInfo * _schedulerInfo = (struct schedulerInfo *) arguments;
     //While it is allowed to keep working
     while (_schedulerInfo->working){
@@ -61,7 +70,7 @@ struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo){
      * I'll employ a strategy pattern here, depending on the value of the scheduler type
      */
     switch (_schedulerInfo->_configuration->schedulerType) {
-        case FIFO:{
+        case FIFO:{//I place the last received one in last place, so I just pick the first one
             return _schedulerInfo->readyList->firstNode;
         }
         case SJF:{
@@ -82,4 +91,37 @@ struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo){
         }
     }
     return NULL;
+}
+
+void showStatistics(struct schedulerInfo * _schedulerInfo){
+    printf("\n\n----------------------------------------\nStatistics: ");
+    switch (_schedulerInfo->_configuration->schedulerType) {
+        case FIFO:{
+            printf("FIFO");
+            break;
+        }
+        case SJF:{
+            printf("SJF");
+            break;
+        }
+        case HPF:{
+            printf("HPF");
+            break;
+        }
+        case ROUNDROBIN:{
+            printf("Round Robin");
+            break;
+        }
+        case ASJF:{
+            printf("Appropiative SJF");
+            break;
+        }
+        case AHPF:{
+            printf("Appropiative HPF");
+            break;
+        }
+    }
+    printf(" Scheduler\nIdle Time: %d\nProcesses completed: %d", _schedulerInfo->idleTicks, _schedulerInfo->doneList->len);
+
+    //TODO: Add remaining statistics
 }

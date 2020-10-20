@@ -25,9 +25,12 @@ int main() {
 
     //<editor-fold defaultstate=collapsed desc="Data Structures">
     //A new ready list, initialized on 0s
-    struct pcbList readyList;
+    struct pcbList readyList, doneList;
     readyList.firstNode = NULL;
     readyList.len = 0;
+
+    doneList.firstNode = NULL;
+    doneList.len = 0;
 
     /*
     struct pcb *_pcb = createPcb(1, 2, 1, 0);
@@ -43,7 +46,9 @@ int main() {
     //I'll create this so both schedulers can access it
     struct schedulerInfo _schedulerInfo;
     _schedulerInfo.readyList = &readyList;
+    _schedulerInfo.doneList = &doneList;
     _schedulerInfo.tick = 0;
+    _schedulerInfo.idleTicks = 0;
     _schedulerInfo._configuration = &_configuration;
 
     //</editor-fold>
@@ -51,12 +56,20 @@ int main() {
     printf("Data structures prepared, preparing threads\n");
 
     // <editor-fold defaultstate=collapsed desc="Threads Setup">
-    pthread_t threads[2];
+    pthread_t threads[3];
+
+    //Create the job scheduler, check for errors
     int result = pthread_create(&threads[0], NULL, jobSchedulerWork, &_schedulerInfo);
     if (result)
         return 1;
 
+    //Create the cpu scheduler, check for errors
     result = pthread_create(&threads[1], NULL, cpuSchedulerWork, &_schedulerInfo);
+    if (result)
+        return 1;
+
+    //Create the tick increaser, check for errors
+    result = pthread_create(&threads[2], NULL, clockTickerWork, &_schedulerInfo);
     if (result)
         return 1;
 
@@ -68,12 +81,16 @@ int main() {
     //Flag the threads to stop working
     _schedulerInfo.working = 0;
 
+    //I'll try to join all the threads before exiting
     result = pthread_join(threads[0], NULL);
     if (!result) {
-        if (readyList.len > 0) {
-            printf("Pid in list: %d", readyList.firstNode->node->pid);
-        }
-        return 0;
+        //I joined them all without issues, I'll show statistics before leaving
+        showStatistics(&_schedulerInfo);
+
+        //Clear both lists
+        clearList(_schedulerInfo.readyList);
+        clearList(_schedulerInfo.doneList);
+        return 0;//All is good
     }
     return 1;
 }

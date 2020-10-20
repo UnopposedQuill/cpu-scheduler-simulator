@@ -31,14 +31,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7661d48d-378b-4e1e-a98f-95c8f2fbbffb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.c" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.h" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcb.c" beforeDir="false" afterPath="$PROJECT_DIR$/pcb.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pcb.h" beforeDir="false" afterPath="$PROJECT_DIR$/pcb.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scheduler.c" beforeDir="false" afterPath="$PROJECT_DIR$/scheduler.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scheduler.h" beforeDir="false" afterPath="$PROJECT_DIR$/scheduler.h" afterDir="false" />
     </list>
@@ -74,11 +67,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,7 +84,8 @@
       <workItem from="1603050456966" duration="1432000" />
       <workItem from="1603052422879" duration="1212000" />
       <workItem from="1603063223959" duration="6835000" />
-      <workItem from="1603086171900" duration="3929000" />
+      <workItem from="1603086171900" duration="4565000" />
+      <workItem from="1603144857734" duration="3582000" />
     </task>
     <servers />
   </component>
@@ -128,38 +117,38 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="738" y="300" width="424" height="521" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1602287846142" />
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1603093466310">
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom" timestamp="1603152105540">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603093466310" />
-    <state width="1874" height="275" key="GridCell.Tab.0.center" timestamp="1603093466310">
+    <state width="1874" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603152105540" />
+    <state width="1874" height="275" key="GridCell.Tab.0.center" timestamp="1603152105540">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603093466310" />
-    <state width="1874" height="275" key="GridCell.Tab.0.left" timestamp="1603093466310">
+    <state width="1874" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603152105540" />
+    <state width="1874" height="275" key="GridCell.Tab.0.left" timestamp="1603152105539">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603093466310" />
-    <state width="1874" height="275" key="GridCell.Tab.0.right" timestamp="1603093466310">
+    <state width="1874" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603152105539" />
+    <state width="1874" height="275" key="GridCell.Tab.0.right" timestamp="1603152105540">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603093466310" />
-    <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1603080765585">
+    <state width="1874" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603152105540" />
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1603152060452">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603080765585" />
-    <state width="1874" height="340" key="GridCell.Tab.1.center" timestamp="1603080765585">
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1603152060452" />
+    <state width="1874" height="340" key="GridCell.Tab.1.center" timestamp="1603152060451">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603080765585" />
-    <state width="1874" height="340" key="GridCell.Tab.1.left" timestamp="1603080765585">
+    <state width="1874" height="340" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1603152060451" />
+    <state width="1874" height="340" key="GridCell.Tab.1.left" timestamp="1603152060451">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603080765585" />
-    <state width="1874" height="340" key="GridCell.Tab.1.right" timestamp="1603080765585">
+    <state width="1874" height="340" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1603152060451" />
+    <state width="1874" height="340" key="GridCell.Tab.1.right" timestamp="1603152060451">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="340" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603080765585" />
+    <state width="1874" height="340" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1603152060451" />
     <state x="654" y="108" width="611" height="891" key="find.popup" timestamp="1602720900016">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -168,16 +157,5 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1603003206300" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/pcb.c</url>
-          <line>39</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
