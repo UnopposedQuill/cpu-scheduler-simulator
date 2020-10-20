@@ -17,8 +17,9 @@ struct configuration{
 
     /**
      * There are multiple types of schedulers, this will signal which one is being simulated
+     * In case of schedulerType == ROUNDROBIN then the quantum will be used
      */
-    int schedulerType;
+    int schedulerType, quantum;
 
     /**
      * This is needed for the server, to decide how it will attend to requests

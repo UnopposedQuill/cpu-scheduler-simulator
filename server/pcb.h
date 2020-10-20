@@ -6,7 +6,7 @@
 #define SERVER_PCB_H
 
 struct pcb{
-    unsigned int pid, burst, priority, progress, tickOfEntry;
+    unsigned int pid, burst, priority, progress, tickOfEntry, tickOfCompletion;
 };
 
 struct pcbNode{
@@ -22,7 +22,7 @@ struct pcbList{
 struct pcb * createPcb(unsigned int pid, unsigned int burst, unsigned int priority, unsigned int tick);
 void destroyPcb(struct pcb * _pcb);
 struct pcbNode * insertNewPcb(struct pcbList * _pcbList, struct pcb * _pcb);
-struct pcbNode * removePcbPid(struct pcbList * _pcbList, int pid);
+struct pcbNode * removePcbPid(struct pcbList * _pcbList, unsigned int pid);
 int clearList(struct pcbList * _pcbList);
 
 #endif //SERVER_PCB_H

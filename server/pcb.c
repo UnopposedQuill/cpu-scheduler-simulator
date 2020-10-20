@@ -45,22 +45,30 @@ struct pcbNode * insertNewPcb(struct pcbList * _pcbList, struct pcb * _pcb){
         wrapper = malloc(sizeof(struct pcbNode));
     } while (wrapper == NULL);
 
+    //Assign the data inside the wrapper
     wrapper->node = _pcb;
-    wrapper->next = _pcbList->firstNode;
+    wrapper->next = NULL;
     _pcbList->len++;
 
+    //If there are no elements, just place it there
     if (_pcbList->firstNode == NULL){
         _pcbList->firstNode = wrapper;
         wrapper->previous = NULL;
     }
     else{
-        _pcbList->firstNode->previous = wrapper;
+        //I need to go through all the list, until the last element
+        struct pcbNode * ptr = _pcbList->firstNode;
+        while (ptr->next != NULL) ptr = ptr->next;
+
+        //Then hook the current wrapper to the last element
+        ptr->next = wrapper;
+        wrapper->previous = ptr;
     }
 
     return wrapper;
 }
 
-struct pcbNode * removePcbPid(struct pcbList * _pcbList, int pid){
+struct pcbNode * removePcbPid(struct pcbList * _pcbList, unsigned int pid){
     if (_pcbList == NULL) return NULL;//No list to remove from
 
     struct pcbNode * ptr = _pcbList->firstNode;
@@ -75,8 +83,9 @@ struct pcbNode * removePcbPid(struct pcbList * _pcbList, int pid){
             }
             _pcbList->len--;
             if (_pcbList->firstNode == ptr){
-                _pcbList->firstNode = NULL;
+                _pcbList->firstNode = ptr->next;
             }
+            ptr->next = ptr->previous = NULL;
             return ptr;
         }
 
