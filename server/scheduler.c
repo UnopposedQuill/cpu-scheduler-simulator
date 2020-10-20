@@ -147,10 +147,11 @@ void * cpuSchedulerWork(void * arguments){
                 sleep(_schedulerInfo->currentProcess->node->burst);
                 _schedulerInfo->currentProcess->node->progress = _schedulerInfo->currentProcess->node->burst;
                 _schedulerInfo->currentProcess->node->tickOfCompletion = _schedulerInfo->tick;
+
                 printf("Completed job: %d\n", _schedulerInfo->currentProcess->node->pid);
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
-                free(scheduledPcb);//Discard the wrapper
                 insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
+                free(scheduledPcb);//Discard the wrapper
             }
             else {
                 unsigned int amountOfWork = 1;
