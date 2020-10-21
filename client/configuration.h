@@ -30,6 +30,13 @@ struct configuration{
      * 0 for manual mode
      */
     int clientMode;
+
+    /**
+     * All these are parameters to the automatic client mode, controlling
+     * how new processes are triggered
+     * First two define how long the processes can be, the latter meaning the time between processes
+     */
+    unsigned int minimumBurst, maximumBurst, minimumIssuingTime, maximumIssuingTime;
 };
 
 /**

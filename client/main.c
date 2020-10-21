@@ -37,7 +37,42 @@ int main() {
 
     //If the client is on auto or manual mode
     if (_configuration.clientMode){//1 for automatic mode
-        printf("Automatic Mode not implemented yet\n");
+        while (1){
+            deleteDone(&_requesterDataList);
+
+            unsigned int burst, priority;
+
+            burst = rand() % (_configuration.maximumBurst+1) + _configuration.minimumBurst;
+            priority = rand() % 6 + 1;
+
+            char * line;
+
+            //Will block until it can allocate both variables' data
+            do {
+                _requesterData = malloc(sizeof(struct requesterData));
+            } while (_requesterData == NULL);
+
+            do {
+                line = malloc(sizeof(char) * 256);
+            } while (line == NULL);
+
+            sprintf(line, "%d,%d", burst, priority);
+
+            _requesterData->isDone = 0;//It's not done
+            _requesterData->_configuration = &_configuration;
+            _requesterData->threadId = threadCount++;
+            _requesterData->line = line;
+
+            //Add it to the ongoing threads
+            insertNewThread(&_requesterDataList, _requesterData);
+
+            //Create the job scheduler, check for errors
+            int result = pthread_create(&_requesterData->_pthread, NULL, requesterJob, _requesterData);
+            if (result)// Couldn't create the new thread
+                return 1;
+
+            sleep(rand() % (_configuration.maximumIssuingTime+1) + _configuration.minimumIssuingTime);
+        }
     } else{
         //These I use to get the line from the file
         FILE * inputFile = fopen("processes.txt", "r");
