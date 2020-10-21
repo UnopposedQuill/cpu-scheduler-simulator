@@ -43,7 +43,7 @@ int main() {
             unsigned int burst, priority;
 
             burst = rand() % (_configuration.maximumBurst+1) + _configuration.minimumBurst;
-            priority = rand() % 6 + 1;
+            priority = rand() % 5 + 1;
 
             char * line;
 

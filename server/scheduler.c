@@ -134,7 +134,7 @@ void * cpuSchedulerWork(void * arguments){
     struct schedulerInfo * _schedulerInfo = (struct schedulerInfo *) arguments;
     //While it is allowed to keep working
     while (_schedulerInfo->working){
-        printf("Selecting new process to execute\n");
+        printf("Searching for other processes to execute\n");
         struct pcbNode * scheduledPcb = schedule(_schedulerInfo);
         if (scheduledPcb == NULL){//Didn't find any work to do, get into idle mode
             printf("No ready jobs in queue\n");
@@ -142,7 +142,10 @@ void * cpuSchedulerWork(void * arguments){
             sleep(1);
         }
         else{ //There's work I can do
-            printf("Selected job pid: %d, burst: %d, priority: %d\n", scheduledPcb->node->pid, scheduledPcb->node->burst, scheduledPcb->node->priority);
+            if (scheduledPcb != _schedulerInfo->currentProcess) {
+                printf("Context switch to job pid: %d, burst: %d, priority: %d\n", scheduledPcb->node->pid,
+                       scheduledPcb->node->burst, scheduledPcb->node->priority);
+            }
             _schedulerInfo->currentProcess = scheduledPcb;//I design the found pcb as the one it's being worked
             if (    _schedulerInfo->_configuration->schedulerType != ASJF &&
                     _schedulerInfo->_configuration->schedulerType != AHPF &&
