@@ -22,14 +22,6 @@ pcb.h
 scheduler.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.c
-stdlib.h
--
-stdio.h
--
-pcb.h
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
-
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
