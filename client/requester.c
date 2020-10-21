@@ -15,6 +15,9 @@ void * requesterJob(void * arguments){
 
     struct requesterData * _requesterData = (struct requesterData*)arguments;
 
+    //According to specification, I need to simulate a delay on requests, 2 seconds
+    sleep(2);
+
     // <editor-fold defaultstate=collapsed desc="Socket preparation">
     //First I need a handler for the socket I'll use to communicate with the server
     int socket_handler, valread;
@@ -38,10 +41,10 @@ void * requesterJob(void * arguments){
     //Time to add the values I do need, first the protocol: ipv4
     serv_addr.sin_family = AF_INET;
     //Now the port
-    serv_addr.sin_port = htons(_requesterData->_configuration.port);
+    serv_addr.sin_port = htons(_requesterData->_configuration->port);
 
     //Now I convert the address into it's binary network form
-    if(inet_pton(AF_INET, _requesterData->_configuration.serverAddress, &serv_addr.sin_addr) <= 0){
+    if(inet_pton(AF_INET, _requesterData->_configuration->serverAddress, &serv_addr.sin_addr) <= 0){
         perror("Address invalid or not supported");
         _requesterData->isDone = 1;//Found an error, mark it as done
         return NULL;
@@ -55,7 +58,7 @@ void * requesterJob(void * arguments){
     }
     // </editor-fold>
 
-
+    // <editor-fold defaultstate=collapsed desc="Request committing">
     //Try to send it to the server
     if ((valread = send(socket_handler, _requesterData->line, strlen(_requesterData->line) + 1, 0)) <= 0){
         perror("Couldn't write data to server");
@@ -63,17 +66,18 @@ void * requesterJob(void * arguments){
         _requesterData->isDone = 1;//Flag this thread as finished
         return NULL;
     }
-    printf("Process: %s", buffer);
-    //Clear the buffer before reading again
+    //Clear the buffer before reading
     memset(buffer, 0, 256);
     //Now I'll output the Pid the server assigned to it
-    if ((valread = recv(socket_handler, buffer, 256, 0)) <= 0){
+    if ((valread = recv(socket_handler, buffer, 255, 0)) <= 0){
         perror("Couldn't receive back the pid assigned by the server");
         close(socket_handler);
         _requesterData->isDone = 1;//Flag this thread as finished
         return NULL;
     }
-    printf(".\t Pid assigned by server: %s\n", buffer);
+    printf("Process: %s.\t Pid assigned by server: %s\n", _requesterData->line, buffer);
+
+    // </editor-fold>
 
     _requesterData->isDone = 1;//It is done
     return NULL;
@@ -150,34 +154,6 @@ int deleteDone(struct requesterDataList * _requesterDataList){
         }
     }
     return threadsCleared;
-}
-
-short removeThreadId(struct requesterDataList * _requesterDataList, unsigned int threadId){
-    if (_requesterDataList == NULL) return 0;//No list to remove from
-
-    struct requesterDataNode * ptr = _requesterDataList->firstNode;
-    while (ptr != NULL){
-        //If the current pointer matches thread id, remove it
-        if (ptr->node->threadId == threadId){
-            if (ptr->previous != NULL){
-                ptr->previous->next = ptr->next;
-            }
-            if (ptr->next != NULL){
-                ptr->next->previous = ptr->previous;
-            }
-            _requesterDataList->len--;
-            if (_requesterDataList->firstNode == ptr){
-                _requesterDataList->firstNode = ptr->next;
-            }
-            free(ptr);//Deallocate it
-            return 1;
-        }
-
-        //Keep looking
-        ptr = ptr->next;
-    }
-    //Didn't find it
-    return 0;
 }
 
 int clearList(struct requesterDataList * _requesterDataList){

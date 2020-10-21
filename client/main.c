@@ -1,7 +1,10 @@
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
 #include <malloc.h>
+#include <unistd.h>
 
 #include "configuration.h"
 #include "requester.h"
@@ -21,8 +24,7 @@ int main() {
     //</editor-fold>
 
     int valread;
-
-    char buffer[256];
+    srand(time(NULL));
 
     //These I use to create the threads dinamically
     unsigned int threadCount = 0;//I need to have these in order to increase the thread pool size
@@ -71,8 +73,25 @@ int main() {
             int result = pthread_create(&_requesterData->_pthread, NULL, requesterJob, _requesterData);
             if (result)// Couldn't create the new thread
                 return 1;
+
+            sleep(rand() % 9 + 3);
         }
     }
+    //I need to signal this process to wait until the last process is done
+    int result;
+
+    //While there are nodes in requesterDataList
+    while (_requesterDataList.firstNode != NULL){
+        result = pthread_join(_requesterDataList.firstNode->node->_pthread, NULL);
+        if (result){
+            return 1;
+        }
+        if (_requesterDataList.firstNode->node->isDone){//Make sure it is flagged as done
+            deleteDone(&_requesterDataList);//Remove this, and hopefully other done threads
+        }
+    }
+
+
     //Make sure to clear this before leaving, although it's not necessary since the process is about to end
     clearList(&_requesterDataList);
 

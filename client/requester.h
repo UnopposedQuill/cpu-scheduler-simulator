@@ -51,7 +51,6 @@ struct requesterDataList {
 void * requesterJob(void * arguments);
 struct requesterDataNode * insertNewThread(struct requesterDataList * _requesterDataList, struct requesterData * _requesterData);
 int deleteDone(struct requesterDataList * _requesterDataList);
-short removeThreadId(struct requesterDataList * _requesterDataList, unsigned int threadId);
 int clearList(struct requesterDataList * _requesterDataList);
 void destroyRequesterData(struct requesterData * _requesterData);
 

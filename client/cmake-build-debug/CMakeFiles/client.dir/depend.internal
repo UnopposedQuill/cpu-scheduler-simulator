@@ -7,6 +7,7 @@ CMakeFiles/client.dir/configuration.c.o
 CMakeFiles/client.dir/main.c.o
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c
+ /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.h
 CMakeFiles/client.dir/requester.c.o
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
  /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/requester.c

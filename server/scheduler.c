@@ -102,15 +102,13 @@ void * jobSchedulerWork(void * arguments){
         //Now I need to convert them
         char * burst, * priority;
         //Use strtok to separate both values
-        burst = strtok(buffer, "\t");
-        priority = strtok(NULL, "\t");
+        burst = strtok(buffer, ",");
+        priority = strtok(NULL, ",");
 
         //Now I can use strtol to convert them into long, which I cast into unsigned integers
         struct pcbNode * inserted = insertNewPcb(_schedulerInfo->readyList,
                                             createPcb(_schedulerInfo->lastPid++, (unsigned int)strtol(burst, NULL, 10),
                                                     (unsigned int)strtol(priority, NULL, 10), _schedulerInfo->tick));
-
-        free(burst);free(priority);//I don't need either anymore
 
         printf("Added new process to ready queue pid: %d, burst: %d, priority: %d, tick of entry: %d\n", inserted->node->pid, inserted->node->burst, inserted->node->priority, inserted->node->tickOfEntry);
         //Now I have to reply the Pid assigned

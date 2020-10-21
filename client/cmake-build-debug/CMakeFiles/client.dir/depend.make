@@ -6,6 +6,7 @@ CMakeFiles/client.dir/configuration.c.o: ../configuration.h
 
 CMakeFiles/client.dir/main.c.o: ../configuration.h
 CMakeFiles/client.dir/main.c.o: ../main.c
+CMakeFiles/client.dir/main.c.o: ../requester.h
 
 CMakeFiles/client.dir/requester.c.o: ../configuration.h
 CMakeFiles/client.dir/requester.c.o: ../requester.c
