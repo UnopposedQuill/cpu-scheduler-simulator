@@ -2,6 +2,8 @@
 // Created by esteban on 17/10/20.
 //
 #include <stdlib.h>
+#include <stdio.h>
+
 #include "pcb.h"
 
 /**
@@ -112,4 +114,14 @@ int clearList(struct pcbList * _pcbList){
     }
     return pcbCleared;
 
+}
+
+void printList(struct pcbList * _pcbList){
+    struct pcbNode * ptr = _pcbList->firstNode;
+
+    while (ptr != NULL && ptr->node != NULL){//No wrapper should have it's node NULL, but I prefer to prevent errors
+        printf("Process pid: %d, burst: %d, priority: %d, tick of entry: %d\n",
+               ptr->node->pid, ptr->node->burst, ptr->node->priority, ptr->node->tickOfEntry);
+        ptr = ptr->next;
+    }
 }

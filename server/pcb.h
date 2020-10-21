@@ -24,5 +24,6 @@ void destroyPcb(struct pcb * _pcb);
 struct pcbNode * insertNewPcb(struct pcbList * _pcbList, struct pcb * _pcb);
 struct pcbNode * removePcbPid(struct pcbList * _pcbList, unsigned int pid);
 int clearList(struct pcbList * _pcbList);
+void printList(struct pcbList * _pcbList);
 
 #endif //SERVER_PCB_H

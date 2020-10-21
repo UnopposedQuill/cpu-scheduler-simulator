@@ -10,7 +10,7 @@
 
 struct schedulerInfo{
     unsigned int tick, idleTicks, lastPid;
-    int working;//This will be used as a flag as to when to stop
+    int working, pause;//This will be used as a flag as to when to stop
     struct pcbNode * currentProcess;
     struct pcbList * readyList, * doneList;
     struct configuration * _configuration;

@@ -18,6 +18,11 @@ void * clockTickerWork(void * arguments){
     while (_schedulerInfo->working){
         sleep(1);
         _schedulerInfo->tick++;
+
+        //So I can print comfortably
+        while (_schedulerInfo->pause){
+            sleep(1);
+        }
     }
     return NULL;
 }
@@ -122,6 +127,11 @@ void * jobSchedulerWork(void * arguments){
             return NULL;
         }
         close(new_socket);//I'm done serving this request, time to go with the next one
+
+        //So I can print comfortably
+        while (_schedulerInfo->pause){
+            sleep(1);
+        }
     }
 
     // </editor-fold>
@@ -177,6 +187,10 @@ void * cpuSchedulerWork(void * arguments){
                     _schedulerInfo->currentProcess = NULL;
                 }
             }
+        }
+        //This is so I can print comfortably
+        while (_schedulerInfo->pause){
+            sleep(1);
         }
     }
     return NULL;

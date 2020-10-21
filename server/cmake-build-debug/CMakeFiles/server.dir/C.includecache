@@ -8,26 +8,28 @@
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
 
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
-
-/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.c
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/main.c
 stdio.h
 -
-stdlib.h
--
-string.h
+pthread.h
 -
 unistd.h
 -
-malloc.h
--
-sys/socket.h
--
-netinet/in.h
--
+configuration.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/configuration.h
+pcb.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
 scheduler.h
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h
+
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.c
+stdlib.h
+-
+stdio.h
+-
 pcb.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
+
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/pcb.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/server/scheduler.h

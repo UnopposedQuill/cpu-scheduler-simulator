@@ -41,6 +41,8 @@ int main() {
     _schedulerInfo.idleTicks = 0;
     _schedulerInfo._configuration = &_configuration;
     _schedulerInfo.currentProcess = NULL;
+    _schedulerInfo.working = 1;
+    _schedulerInfo.pause = 0;
 
     //</editor-fold>
 
@@ -69,10 +71,25 @@ int main() {
     printf("Threads prepared\n");
 
     // <editor-fold defaultstate=collapsed desc="Closing actions">
-    int c;
+    int c = 0;
 
-    printf( "Program is working, press a key to finish\n");
-    c = getchar();
+    printf( "Program is working, press 'c' key to finish, or 'a' key to print all the ready processes\n");
+
+    do {
+        c = getchar();
+
+        if (c == 'a'){
+            _schedulerInfo.pause = 1;
+            sleep(1);
+            printf("\nReady List:\n");
+            printList(_schedulerInfo.readyList);
+            printf("End of list\n");
+            sleep(1);
+            _schedulerInfo.pause = 0;
+        }
+    } while (c != 'c');
+
+    printf("'c' key pressed, stopping...\n");
 
     //Flag the threads to stop working
     _schedulerInfo.working = 0;
