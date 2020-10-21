@@ -192,7 +192,7 @@ struct pcbNode * schedule(struct schedulerInfo * _schedulerInfo){
         case SJF:{
             //First will be used to go through the list, second will be used to store the best one
             struct pcbNode * ptr = _schedulerInfo->readyList->firstNode, * bestPcb = NULL;
-            while (ptr->node != NULL){
+            while (ptr != NULL){
                 //I found a better pcb to target next
                 if (bestPcb == NULL || ptr->node->burst - ptr->node->progress < bestPcb->node->burst - bestPcb->node->progress){
                     bestPcb = ptr;
