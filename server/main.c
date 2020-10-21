@@ -40,6 +40,7 @@ int main() {
     _schedulerInfo.tick = 0;
     _schedulerInfo.idleTicks = 0;
     _schedulerInfo._configuration = &_configuration;
+    _schedulerInfo.currentProcess = NULL;
 
     //</editor-fold>
 

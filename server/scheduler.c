@@ -155,6 +155,7 @@ void * cpuSchedulerWork(void * arguments){
                 removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                 insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
                 free(scheduledPcb);//Discard the wrapper
+                _schedulerInfo->currentProcess = NULL;
             }
             else {
                 unsigned int amountOfWork = 1;
@@ -170,6 +171,7 @@ void * cpuSchedulerWork(void * arguments){
                     removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                     insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
                     free(scheduledPcb);//Discard the wrapper
+                    _schedulerInfo->currentProcess = NULL;
                 }
             }
         }
