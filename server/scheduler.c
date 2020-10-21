@@ -79,18 +79,20 @@ void * jobSchedulerWork(void * arguments){
         return NULL;
     }
 
-    if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
-        //No pudo aceptarla
-        perror("\nError upon accepting a new connection");
-        close(new_socket);
-        _schedulerInfo->working = 0;
-        return NULL;
-    }
-
     // </editor-fold>
 
     // <editor-fold defaultstate=collapsed desc="Socket serving cycle">
     while (_schedulerInfo->working){
+
+        //Each socket connection will bring at most one process here
+        if((new_socket = accept(server_fd, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0){
+            //No pudo aceptarla
+            perror("\nError upon accepting a new connection");
+            close(new_socket);
+            _schedulerInfo->working = 0;
+            return NULL;
+        }
+
         //I'll try to read the line which is in format "burst,priority\n" from the socket
         if ((valread = recv(new_socket, buffer, 256, 0)) <= 0){
             perror("Error upon reading new request, client probably disconnected, finalizing job scheduler");
@@ -119,6 +121,7 @@ void * jobSchedulerWork(void * arguments){
             close(new_socket);
             return NULL;
         }
+        close(new_socket);//I'm done serving this request, time to go with the next one
     }
 
     // </editor-fold>

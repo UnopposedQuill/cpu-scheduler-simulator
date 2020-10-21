@@ -77,7 +77,7 @@ int main() {
     _schedulerInfo.working = 0;
 
     //I'll try to join all the threads before exiting
-    result = pthread_join(threads[0], NULL);
+    result = pthread_join(threads[1], NULL);
     if (!result) {
         //I joined them all without issues, I'll show statistics before leaving
         showStatistics(&_schedulerInfo);

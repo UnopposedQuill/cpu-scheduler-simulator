@@ -1,25 +1,13 @@
+
 #include <stdio.h>
-#include <netinet/in.h>
+#include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <unistd.h>
+#include <pthread.h>
 #include <malloc.h>
+#include <unistd.h>
 
 #include "configuration.h"
-
-/**
- * This function will take care of replacing the first ocurrence of a character, it is used to remove
- * the newline character from getLine
- * @param string A string which to replace the character in
- * @param find The character that will be replaced
- * @param replace The new character that will replace the other one
- */
-void replaceFirstCharacter(char * string, char find, char replace){
-    while (*(string++)){
-        if (*string == find) *string = replace;
-    }
-}
+#include "requester.h"
 
 int main() {
 
@@ -35,82 +23,77 @@ int main() {
 
     //</editor-fold>
 
-    // <editor-fold defaultstate=collapsed desc="Socket preparation">
-    //First I need a handler for the socket I'll use to communicate with the server
-    int socket_handler, valread;
+    int valread;
+    srand(time(NULL));
 
-    //Now the address to the server
-    struct sockaddr_in serv_addr;
+    //These I use to create the threads dinamically
+    unsigned int threadCount = 0;//I need to have these in order to increase the thread pool size
+    struct requesterData * _requesterData = NULL;
 
-    //A buffer for the communication
-    char buffer[256];memset(buffer, 0, 256);//Create and clear the buffer
-
-    //First I need to create the socket in the handler
-    if((socket_handler = socket(AF_INET, SOCK_STREAM, 0)) < 0){
-        perror("Socket creation error");
-        return 1;
-    }
-
-    //I need to clear some values I don't need
-    memset(&serv_addr, 0, sizeof(serv_addr));
-
-    //Time to add the values I do need, first the protocol: ipv4
-    serv_addr.sin_family = AF_INET;
-    //Now the port
-    serv_addr.sin_port = htons(_configuration.port);
-
-    //Now I convert the address into it's binary network form
-    if(inet_pton(AF_INET, _configuration.serverAddress, &serv_addr.sin_addr) <= 0){
-        perror("Address invalid or not supported");
-        return 1;
-    }
-
-    //Now I try connecting to the server
-    if(connect(socket_handler, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) < 0){
-        perror("Couldn't connect to server");
-        return 1;
-    }
-    // </editor-fold>
+    //I need a new list for the threads
+    struct requesterDataList _requesterDataList;
+    _requesterDataList.firstNode = NULL;
+    _requesterDataList.len = 0;
 
     //If the client is on auto or manual mode
     if (_configuration.clientMode){//1 for automatic mode
         printf("Automatic Mode not implemented yet\n");
     } else{
+        //These I use to get the line from the file
         FILE * inputFile = fopen("processes.txt", "r");
         char * line = NULL;
         size_t len = 256;
 
         //While there is file to read, keep reading
-        while ((valread = getline(&line, &len, inputFile)) != -1){
+        while ((valread = getline(&line, &len, inputFile)) != -1) {
             //Got the line, I'll copy it into the buffer
-            strncpy(buffer, line, valread);//remember it includes the line separator
 
-            replaceFirstCharacter(buffer, '\n', 0);
+            line[valread - 1] = 0;//Add a null to the end of the line
 
-            //Try to send it to the server
-            if ((valread = send(socket_handler, buffer, valread, 0)) < 0){
-                perror("Couldn't write data to server");
-                free(line);
-                close(socket_handler);
+            //First I'll try and recover any usable memory
+            deleteDone(&_requesterDataList);
+
+            //Will block until it can get enough memory for more requesters' data
+            do {
+                _requesterData = malloc(sizeof(struct requesterData));
+            } while (_requesterData == NULL);
+
+            _requesterData->isDone = 0;//It's not done
+            _requesterData->_configuration = &_configuration;
+            _requesterData->threadId = threadCount++;
+            _requesterData->line = line;
+
+            //So I can get a new allocated line next time I use getline
+            line = NULL;
+
+            //Add it to the ongoing threads
+            insertNewThread(&_requesterDataList, _requesterData);
+
+            //Create the job scheduler, check for errors
+            int result = pthread_create(&_requesterData->_pthread, NULL, requesterJob, _requesterData);
+            if (result)// Couldn't create the new thread
                 return 1;
-            }
-            printf("Process: %s", buffer);
-            //Clear the buffer before reading again
-            memset(buffer, 0, 256);
-            //Now I'll output the Pid the server assigned to it
-            if ((valread = recv(socket_handler, buffer, 256, 0)) < 0){
-                perror("Couldn't receive back the pid assigned by the server");
-                free(line);
-                close(socket_handler);
-                return 1;
-            }
-            printf(".\t Pid assigned by server: %s\n", buffer);
-            memset(buffer, 0, 256);
+
+            sleep(rand() % 9 + 3);
         }
-        //I need to free this, as it was allocated by the getLine call
-        free(line);
     }
-    close(socket_handler);
+    //I need to signal this process to wait until the last process is done
+    int result;
+
+    //While there are nodes in requesterDataList
+    while (_requesterDataList.firstNode != NULL){
+        result = pthread_join(_requesterDataList.firstNode->node->_pthread, NULL);
+        if (result){
+            return 1;
+        }
+        if (_requesterDataList.firstNode->node->isDone){//Make sure it is flagged as done
+            deleteDone(&_requesterDataList);//Remove this, and hopefully other done threads
+        }
+    }
+
+
+    //Make sure to clear this before leaving, although it's not necessary since the process is about to end
+    clearList(&_requesterDataList);
 
     return 0;
 }
