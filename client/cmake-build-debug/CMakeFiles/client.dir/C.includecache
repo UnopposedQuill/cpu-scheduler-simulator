@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+configuration.h
+/home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
+
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/configuration.h
 
 /home/esteban/Documentos/Github/cpu-scheduler-simulator/client/main.c

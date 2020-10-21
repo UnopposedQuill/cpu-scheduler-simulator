@@ -258,8 +258,8 @@ void showStatistics(struct schedulerInfo * _schedulerInfo){
 
     while (ptr != NULL && ptr->node != NULL){//No wrapper should have it's node NULL, but I prefer to prevent errors
         unsigned int turnaroundTime = ptr->node->tickOfCompletion - ptr->node->tickOfEntry;
-        printf("Process pid: %d, burst: %d, tick of entry: %d, tick of completion: %d, turn-around time: %d, waiting time: %d\n",
-               ptr->node->pid, ptr->node->burst, ptr->node->tickOfEntry, ptr->node->tickOfCompletion, turnaroundTime, turnaroundTime - ptr->node->burst);
+        printf("Process pid: %d, burst: %d, priority: %d, tick of entry: %d, tick of completion: %d, turn-around time: %d, waiting time: %d\n",
+               ptr->node->pid, ptr->node->burst, ptr->node->priority, ptr->node->tickOfEntry, ptr->node->tickOfCompletion, turnaroundTime, turnaroundTime - ptr->node->burst);
 
         averageTurnAroundTime += turnaroundTime;
         averageWaitingTime += (turnaroundTime - ptr->node->burst);

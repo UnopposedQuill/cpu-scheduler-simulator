@@ -17,7 +17,7 @@ void configure(struct configuration * conf){
         return;
     }
 
-    char port[6], clientMode[2];
+    char port[6], clientMode[2], minimumBurst[16], maximumBurst[16], minimumIssuingTime[16], maximumIssuingTime[16];
 
     //This will take care of reading the config values and setting them into each variable
     fscanf(confFile,
@@ -26,11 +26,24 @@ void configure(struct configuration * conf){
            "Port=%s\n"
            "ClientMode=%s\n", conf->serverAddress, port, clientMode);
 
-    fclose(confFile);
-
     //Now I need to convert, and insert each variable to its corresponding place in the configuration variable
     conf->port = (int) strtol(port, NULL, 10);
     conf->clientMode = (int) strtol(clientMode, NULL, 10);
+
+    //If the client mode is in automatic mode, I need to read additional values
+    if (conf->clientMode == 1){
+        fscanf(confFile, "MinimumBurst=%s\n"
+                                "MaximumBurst=%s\n"
+                                "MinimumIssuingTime=%s\n"
+                                "MaximumIssuingTime=%s\n", minimumBurst, maximumBurst, minimumIssuingTime, maximumIssuingTime);
+
+        conf->minimumBurst = (unsigned int) strtol(minimumBurst, NULL, 10);
+        conf->maximumBurst = (unsigned int) strtol(maximumBurst, NULL, 10);
+        conf->minimumIssuingTime = (unsigned int) strtol(minimumIssuingTime, NULL, 10);
+        conf->maximumIssuingTime = (unsigned int) strtol(maximumIssuingTime, NULL, 10);
+    }
+
+    fclose(confFile);
 
     conf->isValid = 1;
 }
