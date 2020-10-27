@@ -183,8 +183,8 @@ void * cpuSchedulerWork(void * arguments){
                     printf("Completed job pid: %d, burst: %d, priority: %d\n", _schedulerInfo->currentProcess->node->pid, _schedulerInfo->currentProcess->node->burst, _schedulerInfo->currentProcess->node->priority);
                     removePcbPid(_schedulerInfo->readyList, scheduledPcb->node->pid);
                     insertNewPcb(_schedulerInfo->doneList, _schedulerInfo->currentProcess->node);//I completed it, add it to done
+                    _schedulerInfo->currentProcess = _schedulerInfo->currentProcess->previous;//Bug fix on completing process
                     free(scheduledPcb);//Discard the wrapper
-                    _schedulerInfo->currentProcess = NULL;
                 }
             }
         }

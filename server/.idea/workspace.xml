@@ -30,11 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7661d48d-378b-4e1e-a98f-95c8f2fbbffb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/cmake-build-debug/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../client/cmake-build-debug/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/cmake-build-debug/processes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../client/cmake-build-debug/processes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/server.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scheduler.c" beforeDir="false" afterPath="$PROJECT_DIR$/scheduler.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +90,7 @@
       <workItem from="1603255047835" duration="800000" />
       <workItem from="1603301685060" duration="747000" />
       <workItem from="1603312165803" duration="5287000" />
+      <workItem from="1603838499613" duration="203000" />
     </task>
     <servers />
   </component>
